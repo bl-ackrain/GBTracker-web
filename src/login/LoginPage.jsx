@@ -23,23 +23,23 @@ import Loader from '../common/components/Loader';
 const useStyles = makeStyles((theme) => ({
   options: {
     position: 'fixed',
-    top: theme.spacing(2),
-    right: theme.spacing(2),
+    top: '2em',
+    right: '2em',
     display: 'flex',
     flexDirection: 'row',
-    gap: theme.spacing(1),
+    gap: '1em',
   },
   container: {
     display: 'flex',
     flexDirection: 'column',
-    gap: theme.spacing(2),
+    gap: '10px',
   },
   extraContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    gap: theme.spacing(4),
-    marginTop: theme.spacing(2),
+    gap: '4px',
+    marginTop: '2px',
   },
   registerButton: {
     minWidth: 'unset',
@@ -89,7 +89,7 @@ const LoginPage = () => {
         const user = await response.json();
         generateLoginToken();
         dispatch(sessionActions.updateUser(user));
-        navigate('/');
+        navigate('/app');
       } else if (response.status === 401 && response.headers.get('WWW-Authenticate') === 'TOTP') {
         setCodeEnabled(true);
       } else {
@@ -106,7 +106,7 @@ const LoginPage = () => {
     if (response.ok) {
       const user = await response.json();
       dispatch(sessionActions.updateUser(user));
-      navigate('/');
+      navigate('/app');
     } else {
       throw Error(await response.text());
     }
@@ -119,6 +119,7 @@ const LoginPage = () => {
   useEffect(() => nativePostMessage('authentication'), []);
 
   useEffect(() => {
+    
     const listener = (token) => handleTokenLogin(token);
     handleLoginTokenListeners.add(listener);
     return () => handleLoginTokenListeners.delete(listener);
@@ -202,7 +203,7 @@ const LoginPage = () => {
           <Button
             onClick={() => handleOpenIdLogin()}
             variant="contained"
-            color="secondary"
+            color="primary"
           >
             {t('loginOpenId')}
           </Button>

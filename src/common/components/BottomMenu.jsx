@@ -30,13 +30,13 @@ const BottomMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const currentSelection = () => {
-    if (location.pathname === `/settings/user/${user.id}`) {
+    if (location.pathname === `/app/settings/user/${user.id}`) {
       return 'account';
-    } if (location.pathname.startsWith('/settings')) {
+    } if (location.pathname.startsWith('/app/settings')) {
       return 'settings';
-    } if (location.pathname.startsWith('/reports')) {
+    } if (location.pathname.startsWith('/app/reports')) {
       return 'reports';
-    } if (location.pathname === '/') {
+    } if (location.pathname === '/app') {
       return 'map';
     }
     return null;
@@ -44,7 +44,7 @@ const BottomMenu = () => {
 
   const handleAccount = () => {
     setAnchorEl(null);
-    navigate(`/settings/user/${user.id}`);
+    navigate(`/app/settings/user/${user.id}`);
   };
 
   const handleLogout = async () => {
@@ -79,13 +79,13 @@ const BottomMenu = () => {
   const handleSelection = (event, value) => {
     switch (value) {
       case 'map':
-        navigate('/');
+        navigate('/app');
         break;
       case 'reports':
-        navigate('/reports/combined');
+        navigate('/app/reports/combined');
         break;
       case 'settings':
-        navigate('/settings/preferences');
+        navigate('/app/settings/preferences');
         break;
       case 'account':
         setAnchorEl(event.currentTarget);

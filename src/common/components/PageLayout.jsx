@@ -93,7 +93,7 @@ const PageLayout = ({ menu, breadcrumbs, children }) => {
         <Toolbar>
           {!miniVariant && (
             <>
-              <IconButton color="inherit" edge="start" sx={{ mr: 2 }} onClick={() => navigate('/')}>
+              <IconButton color="inherit" edge="start" sx={{ mr: 2 }} onClick={() => navigate('/app')}>
                 <ArrowBackIcon />
               </IconButton>
               <PageTitle breadcrumbs={breadcrumbs} />

@@ -4,6 +4,9 @@ import makeStyles from '@mui/styles/makeStyles';
 import { useTheme } from '@mui/material/styles';
 import LogoImage from './LogoImage';
 
+import CssBaseline from '@mui/material/CssBaseline';
+import AppTheme from '../home/shared-theme/AppTheme';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -13,15 +16,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    background: theme.palette.primary,
-    paddingBottom: theme.spacing(5),
-    width: theme.dimensions.sidebarWidth,
-    [theme.breakpoints.down('lg')]: {
-      width: theme.dimensions.sidebarWidthTablet,
-    },
-    [theme.breakpoints.down('sm')]: {
-      width: '0px',
-    },
+    paddingBottom: '5rem',
+    width: '28%',
   },
   paper: {
     display: 'flex',
@@ -30,13 +26,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     flex: 1,
     boxShadow: '-2px 0px 16px rgba(0, 0, 0, 0.25)',
-    [theme.breakpoints.up('lg')]: {
-      padding: theme.spacing(0, 25, 0, 0),
-    },
+
   },
   form: {
-    maxWidth: theme.spacing(52),
-    padding: theme.spacing(5),
+    maxWidth: '35rem',
+    padding: '5rem',
     width: '100%',
   },
 }));
@@ -46,6 +40,8 @@ const LoginLayout = ({ children }) => {
   const theme = useTheme();
 
   return (
+      <AppTheme>
+        <CssBaseline enableColorScheme />
     <main className={classes.root}>
       <div className={classes.sidebar}>
         {!useMediaQuery(theme.breakpoints.down('lg')) && <LogoImage color={theme.palette.secondary.contrastText} />}
@@ -56,6 +52,7 @@ const LoginLayout = ({ children }) => {
         </form>
       </Paper>
     </main>
+    </AppTheme>
   );
 };
 

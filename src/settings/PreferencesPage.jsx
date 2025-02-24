@@ -354,7 +354,7 @@ const PreferencesPage = () => {
                 <Button
                   variant="outlined"
                   color="primary"
-                  onClick={() => navigate('/emulator')}
+                  onClick={() => navigate('/app/emulator')}
                 >
                   {t('sharedEmulator')}
                 </Button>

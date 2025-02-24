@@ -73,7 +73,7 @@ const GroupsPage = () => {
               <TableCell className={classes.columnAction} padding="none">
                 <CollectionActions
                   itemId={item.id}
-                  editPath="/settings/group"
+                  editPath="/app/settings/group"
                   endpoint="groups"
                   setTimestamp={setTimestamp}
                   customActions={limitCommands ? [actionConnections] : [actionConnections, actionCommand]}
@@ -83,7 +83,7 @@ const GroupsPage = () => {
           )) : (<TableShimmer columns={2} endAction />)}
         </TableBody>
       </Table>
-      <CollectionFab editPath="/settings/group" />
+      <CollectionFab editPath="/app/settings/group" />
     </PageLayout>
   );
 };

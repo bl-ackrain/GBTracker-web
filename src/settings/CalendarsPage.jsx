@@ -50,13 +50,13 @@ const CalendarsPage = () => {
             <TableRow key={item.id}>
               <TableCell>{item.name}</TableCell>
               <TableCell className={classes.columnAction} padding="none">
-                <CollectionActions itemId={item.id} editPath="/settings/calendar" endpoint="calendars" setTimestamp={setTimestamp} />
+                <CollectionActions itemId={item.id} editPath="/app/settings/calendar" endpoint="calendars" setTimestamp={setTimestamp} />
               </TableCell>
             </TableRow>
           )) : (<TableShimmer columns={2} endAction />)}
         </TableBody>
       </Table>
-      <CollectionFab editPath="/settings/calendar" />
+      <CollectionFab editPath="/app/settings/calendar" />
     </PageLayout>
   );
 };

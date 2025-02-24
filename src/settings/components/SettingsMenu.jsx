@@ -41,82 +41,82 @@ const SettingsMenu = () => {
       <List>
         <MenuItem
           title={t('sharedPreferences')}
-          link="/settings/preferences"
+          link="/app/settings/preferences"
           icon={<SettingsIcon />}
-          selected={location.pathname === '/settings/preferences'}
+          selected={location.pathname === '/app/settings/preferences'}
         />
         {!readonly && (
           <>
             <MenuItem
               title={t('sharedNotifications')}
-              link="/settings/notifications"
+              link="/app/settings/notifications"
               icon={<NotificationsIcon />}
-              selected={location.pathname.startsWith('/settings/notification')}
+              selected={location.pathname.startsWith('/app/settings/notification')}
             />
             <MenuItem
               title={t('settingsUser')}
-              link={`/settings/user/${userId}`}
+              link={`/app/settings/user/${userId}`}
               icon={<PersonIcon />}
-              selected={location.pathname === `/settings/user/${userId}`}
+              selected={location.pathname === `/app/settings/user/${userId}`}
             />
             <MenuItem
               title={t('deviceTitle')}
-              link="/settings/devices"
+              link="/app/settings/devices"
               icon={<SmartphoneIcon />}
-              selected={location.pathname.startsWith('/settings/device')}
+              selected={location.pathname.startsWith('/app/settings/device')}
             />
             <MenuItem
               title={t('sharedGeofences')}
-              link="/geofences"
+              link="/app/geofences"
               icon={<CreateIcon />}
-              selected={location.pathname.startsWith('/settings/geofence')}
+              selected={location.pathname.startsWith('/app/settings/geofence')}
             />
             {!features.disableGroups && (
               <MenuItem
                 title={t('settingsGroups')}
-                link="/settings/groups"
+                link="/app/settings/groups"
                 icon={<FolderIcon />}
-                selected={location.pathname.startsWith('/settings/group')}
+                selected={location.pathname.startsWith('/app/settings/group')}
               />
             )}
             {!features.disableDrivers && (
               <MenuItem
                 title={t('sharedDrivers')}
-                link="/settings/drivers"
+                link="/app/settings/drivers"
                 icon={<PersonIcon />}
-                selected={location.pathname.startsWith('/settings/driver')}
+                selected={location.pathname.startsWith('/app/settings/driver')}
               />
             )}
             {!features.disableCalendars && (
               <MenuItem
                 title={t('sharedCalendars')}
-                link="/settings/calendars"
+                link="/app/settings/calendars"
                 icon={<TodayIcon />}
-                selected={location.pathname.startsWith('/settings/calendar')}
+                selected={location.pathname.startsWith('/app/settings/calendar')}
               />
             )}
             {!features.disableComputedAttributes && (
               <MenuItem
                 title={t('sharedComputedAttributes')}
-                link="/settings/attributes"
+                link="/app/settings/attributes"
                 icon={<StorageIcon />}
-                selected={location.pathname.startsWith('/settings/attribute')}
+                selected={location.pathname.startsWith('/app/settings/attribute')}
               />
             )}
             {!features.disableMaintenance && (
               <MenuItem
                 title={t('sharedMaintenance')}
-                link="/settings/maintenances"
+                link="/app/settings/maintenances"
                 icon={<BuildIcon />}
-                selected={location.pathname.startsWith('/settings/maintenance')}
+                selected={location.pathname.startsWith('/app/settings/maintenance')}
               />
             )}
             {!features.disableSavedCommands && (
               <MenuItem
                 title={t('sharedSavedCommands')}
-                link="/settings/commands"
+                link="/app/settings/commands"
                 icon={<PublishIcon />}
-                selected={location.pathname.startsWith('/settings/command')}
+                selected={location.pathname.startsWith('/app/settings/command')}
               />
             )}
             {supportLink && (
@@ -135,23 +135,23 @@ const SettingsMenu = () => {
           <List>
             <MenuItem
               title={t('serverAnnouncement')}
-              link="/settings/announcement"
+              link="/app/settings/announcement"
               icon={<CampaignIcon />}
-              selected={location.pathname === '/settings/announcement'}
+              selected={location.pathname === '/app/settings/announcement'}
             />
             {admin && (
               <MenuItem
                 title={t('settingsServer')}
-                link="/settings/server"
+                link="/app/settings/server"
                 icon={<StorageIcon />}
-                selected={location.pathname === '/settings/server'}
+                selected={location.pathname === '/app/settings/server'}
               />
             )}
             <MenuItem
               title={t('settingsUsers')}
-              link="/settings/users"
+              link="/app/settings/users"
               icon={<PeopleIcon />}
-              selected={location.pathname.startsWith('/settings/user') && location.pathname !== `/settings/user/${userId}`}
+              selected={location.pathname.startsWith('/app/settings/user') && location.pathname !== `/settings/user/${userId}`}
             />
           </List>
         </>

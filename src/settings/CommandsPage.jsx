@@ -59,14 +59,14 @@ const CommandsPage = () => {
               <TableCell>{formatBoolean(item.textChannel, t)}</TableCell>
               {!limitCommands && (
                 <TableCell className={classes.columnAction} padding="none">
-                  <CollectionActions itemId={item.id} editPath="/settings/command" endpoint="commands" setTimestamp={setTimestamp} />
+                  <CollectionActions itemId={item.id} editPath="/app/settings/command" endpoint="commands" setTimestamp={setTimestamp} />
                 </TableCell>
               )}
             </TableRow>
           )) : (<TableShimmer columns={limitCommands ? 3 : 4} endAction />)}
         </TableBody>
       </Table>
-      <CollectionFab editPath="/settings/command" disabled={limitCommands} />
+      <CollectionFab editPath="/app/settings/command" disabled={limitCommands} />
     </PageLayout>
   );
 };

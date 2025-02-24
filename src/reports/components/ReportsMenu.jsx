@@ -28,49 +28,49 @@ const ReportsMenu = () => {
       <List>
         <MenuItem
           title={t('reportCombined')}
-          link="/reports/combined"
+          link="/app/reports/combined"
           icon={<StarIcon />}
-          selected={location.pathname === '/reports/combined'}
+          selected={location.pathname === '/app/reports/combined'}
         />
         <MenuItem
           title={t('reportRoute')}
-          link="/reports/route"
+          link="/app/reports/route"
           icon={<TimelineIcon />}
-          selected={location.pathname === '/reports/route'}
+          selected={location.pathname === '/app/reports/route'}
         />
         <MenuItem
           title={t('reportEvents')}
-          link="/reports/event"
+          link="/app/reports/event"
           icon={<NotificationsActiveIcon />}
-          selected={location.pathname === '/reports/event'}
+          selected={location.pathname === '/app/reports/event'}
         />
         <MenuItem
           title={t('reportTrips')}
-          link="/reports/trip"
+          link="/app/reports/trip"
           icon={<PlayCircleFilledIcon />}
-          selected={location.pathname === '/reports/trip'}
+          selected={location.pathname === '/app/reports/trip'}
         />
         <MenuItem
           title={t('reportStops')}
-          link="/reports/stop"
+          link="/app/reports/stop"
           icon={<PauseCircleFilledIcon />}
-          selected={location.pathname === '/reports/stop'}
+          selected={location.pathname === '/app/reports/stop'}
         />
         <MenuItem
           title={t('reportSummary')}
-          link="/reports/summary"
+          link="/app/reports/summary"
           icon={<FormatListBulletedIcon />}
-          selected={location.pathname === '/reports/summary'}
+          selected={location.pathname === '/app/reports/summary'}
         />
         <MenuItem
           title={t('reportChart')}
-          link="/reports/chart"
+          link="/app/reports/chart"
           icon={<TrendingUpIcon />}
-          selected={location.pathname === '/reports/chart'}
+          selected={location.pathname === '/app/reports/chart'}
         />
         <MenuItem
           title={t('reportReplay')}
-          link="/replay"
+          link="/app/replay"
           icon={<RouteIcon />}
         />
       </List>
@@ -78,24 +78,24 @@ const ReportsMenu = () => {
       <List>
         <MenuItem
           title={t('sharedLogs')}
-          link="/reports/logs"
+          link="/app/reports/logs"
           icon={<NotesIcon />}
-          selected={location.pathname === '/reports/logs'}
+          selected={location.pathname === '/app/reports/logs'}
         />
         {!readonly && (
           <MenuItem
             title={t('reportScheduled')}
-            link="/reports/scheduled"
+            link="/app/reports/scheduled"
             icon={<EventRepeatIcon />}
-            selected={location.pathname === '/reports/scheduled'}
+            selected={location.pathname === '/app/reports/scheduled'}
           />
         )}
         {admin && (
           <MenuItem
             title={t('statisticsTitle')}
-            link="/reports/statistics"
+            link="/app/reports/statistics"
             icon={<BarChartIcon />}
-            selected={location.pathname === '/reports/statistics'}
+            selected={location.pathname === '/app/reports/statistics'}
           />
         )}
       </List>

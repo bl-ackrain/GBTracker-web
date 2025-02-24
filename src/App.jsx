@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { CssBaseline, useMediaQuery, useTheme } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import BottomMenu from './common/components/BottomMenu';
 import SocketController from './SocketController';
@@ -11,6 +11,10 @@ import { sessionActions } from './store';
 import UpdateController from './UpdateController';
 import TermsDialog from './common/components/TermsDialog';
 import Loader from './common/components/Loader';
+
+import AppThemeProvider from './AppThemeProvider'
+import NativeInterface from './common/components/NativeInterface';
+import ErrorHandler from './common/components/ErrorHandler';
 
 const useStyles = makeStyles(() => ({
   page: {
@@ -53,7 +57,7 @@ const App = () => {
       if (response.ok) {
         dispatch(sessionActions.updateUser(await response.json()));
       } else if (newServer) {
-        navigate('/register');
+        navigate('/app/register');
       } else {
         navigate('/login');
       }
@@ -69,17 +73,24 @@ const App = () => {
   }
   return (
     <>
-      <SocketController />
-      <CachingController />
-      <UpdateController />
-      <div className={classes.page}>
-        <Outlet />
-      </div>
-      {!desktop && (
-        <div className={classes.menu}>
-          <BottomMenu />
-        </div>
-      )}
+    <AppThemeProvider>
+      <CssBaseline />
+          <SocketController />
+          <CachingController />
+          <UpdateController />
+          <div className={classes.page}>
+            <Outlet />
+          </div>
+          {!desktop && (
+            <div className={classes.menu}>
+              <BottomMenu />
+            </div>
+          )}
+        
+        <ErrorHandler />
+        <NativeInterface />
+      
+    </AppThemeProvider>
     </>
   );
 };

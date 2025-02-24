@@ -33,7 +33,7 @@ const UsersPage = () => {
   const handleLogin = useCatch(async (userId) => {
     const response = await fetch(`/api/session/${userId}`);
     if (response.ok) {
-      window.location.replace('/');
+      window.location.replace('/app');
     } else {
       throw Error(await response.text());
     }
@@ -92,7 +92,7 @@ const UsersPage = () => {
               <TableCell className={classes.columnAction} padding="none">
                 <CollectionActions
                   itemId={item.id}
-                  editPath="/settings/user"
+                  editPath="/app/settings/user"
                   endpoint="users"
                   setTimestamp={setTimestamp}
                   customActions={manager ? [actionLogin, actionConnections] : [actionConnections]}
@@ -119,7 +119,7 @@ const UsersPage = () => {
           </TableRow>
         </TableFooter>
       </Table>
-      <CollectionFab editPath="/settings/user" />
+      <CollectionFab editPath="/app/settings/user" />
     </PageLayout>
   );
 };

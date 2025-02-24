@@ -92,7 +92,7 @@ const DevicesPage = () => {
               <TableCell className={classes.columnAction} padding="none">
                 <CollectionActions
                   itemId={item.id}
-                  editPath="/settings/device"
+                  editPath="/app/settings/device"
                   endpoint="devices"
                   setTimestamp={setTimestamp}
                   customActions={[actionConnections]}
@@ -124,7 +124,7 @@ const DevicesPage = () => {
           </TableRow>
         </TableFooter>
       </Table>
-      <CollectionFab editPath="/settings/device" />
+      <CollectionFab editPath="/app/settings/device" />
     </PageLayout>
   );
 };

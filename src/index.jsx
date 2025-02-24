@@ -11,7 +11,7 @@ import preloadImages from './map/core/preloadImages';
 import NativeInterface from './common/components/NativeInterface';
 import ServerProvider from './ServerProvider';
 import ErrorBoundary from './ErrorBoundary';
-import AppThemeProvider from './AppThemeProvider';
+import AppThemeProvider from './home/shared-theme/AppTheme';
 
 preloadImages();
 
@@ -21,16 +21,11 @@ root.render(
     <Provider store={store}>
       <LocalizationProvider>
         <StyledEngineProvider injectFirst>
-          <AppThemeProvider>
-            <CssBaseline />
-            <ServerProvider>
-              <BrowserRouter>
-                <Navigation />
-              </BrowserRouter>
-              <ErrorHandler />
-              <NativeInterface />
-            </ServerProvider>
-          </AppThemeProvider>
+          <BrowserRouter>
+          <ServerProvider>
+            <Navigation />
+          </ServerProvider>
+          </BrowserRouter>
         </StyledEngineProvider>
       </LocalizationProvider>
     </Provider>

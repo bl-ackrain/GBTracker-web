@@ -52,13 +52,13 @@ const DriversPage = () => {
               <TableCell>{item.name}</TableCell>
               <TableCell>{item.uniqueId}</TableCell>
               <TableCell className={classes.columnAction} padding="none">
-                <CollectionActions itemId={item.id} editPath="/settings/driver" endpoint="drivers" setTimestamp={setTimestamp} />
+                <CollectionActions itemId={item.id} editPath="/app/settings/driver" endpoint="drivers" setTimestamp={setTimestamp} />
               </TableCell>
             </TableRow>
           )) : (<TableShimmer columns={3} endAction />)}
         </TableBody>
       </Table>
-      <CollectionFab editPath="/settings/driver" />
+      <CollectionFab editPath="/app/settings/driver" />
     </PageLayout>
   );
 };

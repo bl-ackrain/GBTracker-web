@@ -83,7 +83,7 @@ const StopReportPage = () => {
     if (error) {
       throw Error(error);
     } else {
-      navigate('/reports/scheduled');
+      navigate('/app/reports/scheduled');
     }
   });
 

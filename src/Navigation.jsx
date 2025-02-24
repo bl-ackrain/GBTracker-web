@@ -60,6 +60,7 @@ import EmulatorPage from './other/EmulatorPage';
 import Loader from './common/components/Loader';
 import { generateLoginToken } from './common/components/NativeInterface';
 import { useLocalization } from './common/components/LocalizationProvider';
+import HomePage from './home/HomePage';
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -90,7 +91,7 @@ const Navigation = () => {
       } else {
         throw Error(await response.text());
       }
-      navigate('/');
+      navigate('/app');
     } else if (query.get('eventId')) {
       const eventId = parseInt(query.get('eventId'), 10);
       navigate(`/event/${eventId}`);
@@ -98,7 +99,7 @@ const Navigation = () => {
       if (query.get('openid') === 'success') {
         generateLoginToken();
       }
-      navigate('/');
+      navigate('/app');
     } else {
       setRedirectsHandled(true);
     }
@@ -109,12 +110,16 @@ const Navigation = () => {
   }
   return (
     <Routes>
+
+      <Route path="/" element={<HomePage />} />
+
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/reset-password" element={<ResetPasswordPage />} />
-      <Route path="/change-server" element={<ChangeServerPage />} />
-      <Route path="/" element={<App />}>
+      
+      <Route path="/app" element={<App />}>
         <Route index element={<MainPage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route path="reset-password" element={<ResetPasswordPage />} />
+        <Route path="change-server" element={<ChangeServerPage />} />
 
         <Route path="position/:id" element={<PositionPage />} />
         <Route path="network/:positionId" element={<NetworkPage />} />

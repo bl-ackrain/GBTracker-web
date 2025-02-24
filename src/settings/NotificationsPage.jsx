@@ -71,13 +71,13 @@ const NotificationsPage = () => {
               <TableCell>{formatList('alarm', item.attributes.alarms)}</TableCell>
               <TableCell>{formatList('notificator', item.notificators)}</TableCell>
               <TableCell className={classes.columnAction} padding="none">
-                <CollectionActions itemId={item.id} editPath="/settings/notification" endpoint="notifications" setTimestamp={setTimestamp} />
+                <CollectionActions itemId={item.id} editPath="/app/settings/notification" endpoint="notifications" setTimestamp={setTimestamp} />
               </TableCell>
             </TableRow>
           )) : (<TableShimmer columns={5} endAction />)}
         </TableBody>
       </Table>
-      <CollectionFab editPath="/settings/notification" />
+      <CollectionFab editPath="/app/settings/notification" />
     </PageLayout>
   );
 };

@@ -59,14 +59,14 @@ const ComputedAttributesPage = () => {
               <TableCell>{item.type}</TableCell>
               {administrator && (
                 <TableCell className={classes.columnAction} padding="none">
-                  <CollectionActions itemId={item.id} editPath="/settings/attribute" endpoint="attributes/computed" setTimestamp={setTimestamp} />
+                  <CollectionActions itemId={item.id} editPath="/app/settings/attribute" endpoint="attributes/computed" setTimestamp={setTimestamp} />
                 </TableCell>
               )}
             </TableRow>
           )) : (<TableShimmer columns={administrator ? 5 : 4} endAction={administrator} />)}
         </TableBody>
       </Table>
-      <CollectionFab editPath="/settings/attribute" disabled={!administrator} />
+      <CollectionFab editPath="/app/settings/attribute" disabled={!administrator} />
     </PageLayout>
   );
 };
