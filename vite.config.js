@@ -26,9 +26,14 @@ export default defineConfig(() => ({
         globPatterns: ['**/*.{js,css,html,woff,woff2,mp3}'],
       },
       manifest: {
-        short_name: '${title}',
-        name: '${description}',
-        theme_color: '${colorPrimary}',
+        "name": "GBTracker GPS Tracking",
+        "short_name": "GBTracker",
+        "start_url": "/app/",
+        "display": "standalone",
+        "background_color": "#ffffff",
+        "lang": "en",
+        "scope": "/app/",
+        "theme_color": "#ffffff",
         icons: [
           {
             src: 'pwa-64x64.png',
