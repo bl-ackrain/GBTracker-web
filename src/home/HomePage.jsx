@@ -23,8 +23,6 @@ export default function HomePage(props) {
         <LogoCollection />
         <Features />
         <Divider />
-        <Testimonials />
-        <Divider />
         <Highlights />
         <Divider />
         <Pricing />

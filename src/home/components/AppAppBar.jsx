@@ -45,7 +45,7 @@ export default function AppAppBar() {
         boxShadow: 0,
         bgcolor: 'transparent',
         backgroundImage: 'none',
-        mt: 'calc(var(--template-frame-height, 0px) + 28px)',
+        mt: 'calc(var(--template-frame-height, 0px) + 12px)',
       }}
     >
       <Container maxWidth="lg">
@@ -68,9 +68,6 @@ export default function AppAppBar() {
               <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
                 FAQ
               </Button>
-              <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
-                Blog
-              </Button>
             </Box>
           </Box>
           <Box
@@ -79,12 +76,11 @@ export default function AppAppBar() {
               gap: 1,
               alignItems: 'center',
             }}
-          >
-            <Button color="primary" variant="text" size="small">
-              Sign in
+              ><Button sx={{ px: 4}} color="primary" variant="contained" size="small">
+              Demo
             </Button>
-            <Button color="primary" variant="contained" size="small">
-              Sign up
+            <Button sx={{ px: 4}} color="secondary" variant="contained" size="small">
+              Log In
             </Button>
             <ColorModeIconDropdown />
           </Box>
@@ -120,16 +116,15 @@ export default function AppAppBar() {
                 <MenuItem>Highlights</MenuItem>
                 <MenuItem>Pricing</MenuItem>
                 <MenuItem>FAQ</MenuItem>
-                <MenuItem>Blog</MenuItem>
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
                   <Button color="primary" variant="contained" fullWidth>
-                    Sign up
+                    Demo
                   </Button>
                 </MenuItem>
                 <MenuItem>
-                  <Button color="primary" variant="outlined" fullWidth>
-                    Sign in
+                  <Button color="secondary" variant="contained" fullWidth>
+                    Log In
                   </Button>
                 </MenuItem>
               </Box>
