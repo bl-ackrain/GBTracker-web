@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import LogoImage from './LogoImage';
 
 import CssBaseline from '@mui/material/CssBaseline';
-import AppTheme from '../home/shared-theme/AppTheme';
+import AppTheme from '../old_home/shared-theme/AppTheme';
 
 const useStyles = makeStyles((theme) => ({
   root: {

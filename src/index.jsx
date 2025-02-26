@@ -11,7 +11,7 @@ import preloadImages from './map/core/preloadImages';
 import NativeInterface from './common/components/NativeInterface';
 import ServerProvider from './ServerProvider';
 import ErrorBoundary from './ErrorBoundary';
-import AppThemeProvider from './home/shared-theme/AppTheme';
+import AppThemeProvider from './old_home/shared-theme/AppTheme';
 
 preloadImages();
 

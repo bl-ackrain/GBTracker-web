@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import { VitePWA } from 'vite-plugin-pwa';
+import tailwindcss from '@tailwindcss/vite';
 
 /* eslint-disable no-template-curly-in-string */
 export default defineConfig(() => ({
@@ -16,6 +17,7 @@ export default defineConfig(() => ({
     outDir: 'build',
   },
   plugins: [
+    tailwindcss(),
     svgr(),
     react(),
     VitePWA({
