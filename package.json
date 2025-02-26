@@ -20,7 +20,7 @@
   "type": "module",
   "main": "vite.config.js",
   "scripts": {
-    "start": "vite",
+    "start": "vite --host",
     "build": "vite build",
     "generate-pwa-assets": "pwa-assets-generator --preset minimal public/icon.svg",
     "preview": "vite preview",
@@ -54,6 +54,7 @@
     "react-country-flag": "3.1.0",
     "react-dom": "^18.3.1",
     "react-draggable": "^4.4.6",
+    "react-lottie": "^1.2.10",
     "react-mui-dropzone": "^4.0.7",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.2.0",

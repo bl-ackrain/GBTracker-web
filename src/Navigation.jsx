@@ -61,6 +61,7 @@ import Loader from './common/components/Loader';
 import { generateLoginToken } from './common/components/NativeInterface';
 import { useLocalization } from './common/components/LocalizationProvider';
 import HomePage from './home/HomePage';
+import Login from './home/Login';
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -113,7 +114,7 @@ const Navigation = () => {
 
       <Route path="/" element={<HomePage />} />
 
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/login" element={<Login />} />
       
       <Route path="/app" element={<App />}>
         <Route index element={<MainPage />} />
