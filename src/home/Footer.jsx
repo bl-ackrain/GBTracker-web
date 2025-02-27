@@ -11,7 +11,7 @@ const Footer = ()=> {
           <br />
           Providing reliable tech since 2025
         </p>
-        <div className="flex items-center font-medium text-white/50 max-2xl:text-sm">
+        <div className="flex items-center text-white/50 max-2xl:text-sm">
         <span>Designed with</span>
         <span className="px-2 drop-shadow-[0px_4px_16px_rgba(114,92,255,0.50)]">
           <svg width="19" height="17" viewBox="0 0 19 17" fill="red" xmlns="http://www.w3.org/2000/svg"><path d="M1.96563 1.79864C0.0114548 3.75282 0.0114558 6.92117 1.96563 8.87535L8.68932 15.5992C9.2751 16.1849 10.2249 16.185 10.8106 15.5992L17.5344 8.87545C19.4885 6.92127 19.4885 3.75292 17.5344 1.79875C15.5802 -0.155433 12.4118 -0.155432 10.4576 1.79875L9.75005 2.50635L9.04234 1.79864C7.08816 -0.155537 3.91981 -0.155537 1.96563 1.79864Z"></path></svg>
@@ -22,9 +22,9 @@ const Footer = ()=> {
           </div>
           
           </div>
-        <div className="font-medium text-white/50 max-2xl:text-sm">© 2025 GB Tracker - All Rights Reserved.</div>
+        
       </aside>
-      <nav>
+      <nav className='w-full'>
         <h6 className="footer-title">Social</h6>
         <div className="grid grid-flow-col gap-4">
           <a>
@@ -61,6 +61,7 @@ const Footer = ()=> {
             </svg>
           </a>
         </div>
+        <div className="text-white/50 max-2xl:text-sm">© 2025 GB Tracker - All Rights Reserved.</div>
       </nav>
     </footer>
     )

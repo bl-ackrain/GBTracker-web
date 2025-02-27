@@ -15,6 +15,7 @@ import Loader from './common/components/Loader';
 import AppThemeProvider from './AppThemeProvider'
 import NativeInterface from './common/components/NativeInterface';
 import ErrorHandler from './common/components/ErrorHandler';
+import ServerProvider from './ServerProvider';
 
 const useStyles = makeStyles(() => ({
   page: {
@@ -34,8 +35,6 @@ const App = () => {
 
   const desktop = useMediaQuery(theme.breakpoints.up('md'));
 
-  const newServer = useSelector((state) => state.session.server.newServer);
-  const termsUrl = useSelector((state) => state.session.server.attributes.termsUrl);
   const user = useSelector((state) => state.session.user);
 
   const acceptTerms = useCatch(async () => {
@@ -56,9 +55,7 @@ const App = () => {
       const response = await fetch('/api/session');
       if (response.ok) {
         dispatch(sessionActions.updateUser(await response.json()));
-      } else if (newServer) {
-        navigate('/app/register');
-      } else {
+      }else {
         navigate('/login');
       }
     }
@@ -68,12 +65,11 @@ const App = () => {
   if (user == null) {
     return (<Loader />);
   }
-  if (termsUrl && !user.attributes.termsAccepted) {
-    return (<TermsDialog open onCancel={() => navigate('/login')} onAccept={() => acceptTerms()} />);
-  }
+
   return (
     <>
     <AppThemeProvider>
+    <ServerProvider>
       <CssBaseline />
           <SocketController />
           <CachingController />
@@ -89,7 +85,7 @@ const App = () => {
         
         <ErrorHandler />
         <NativeInterface />
-      
+        </ServerProvider>
     </AppThemeProvider>
     </>
   );

@@ -4,15 +4,16 @@ import { useNavigate } from 'react-router-dom';
 const TopBar = ()=> {
   const navigate = useNavigate()
     return(
-  <div className="navbar min-h-4! md:min-h-12! top-2 w-[98%]! rounded-2xl w-full fixed bg-base-100 shadow-sm">
-    <div className="flex-1">
-      <a className="btn btn-ghost">
+  <nav className="w-full px-2 md:px-10 min-h-12 md:min-h-15 flex flex-row items-center justify-between
+   z-20 top-0 fixed bg-base-100 shadow-md">
+    <div className="navbar-start">
+      <a className="link ml-2" href='/'>
         <img
           src="/logo.svg"
           className="md:h-10 h-8" />
       </a>
     </div>
-    <div className="flex-none">
+    <div className="navbar-end">
       <button onClick={() => navigate('/login')}
        className="btn btn-sm md:btn-md  btn-secondary btn-outline">
         Espace Client
@@ -40,7 +41,7 @@ const TopBar = ()=> {
           </svg>
       </label>
     </div>
-  </div>
+  </nav>
 )
 }
 

@@ -3,6 +3,7 @@ import Footer from './Footer';
 import '../resources/main.css'
 import TopBar from './TopBar';
 import Hero from './Hero';
+import Order from './Order';
 
 export default function HomePage(props) {
   return (
@@ -14,7 +15,7 @@ export default function HomePage(props) {
         <img src="/img/Devices.svg" className=" max-w-6xl" />
       </div>
       
-
+      <Order />
       <Footer />
     </main>
   );
