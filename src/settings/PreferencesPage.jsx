@@ -115,7 +115,7 @@ const PreferencesPage = () => {
                         setAttributes({ ...attributes, activeMapStyles: e.target.value.join(',') });
                       } else if (clicked.id !== 'custom') {
                         const query = new URLSearchParams({ attribute: clicked.attribute });
-                        navigate(`/settings/user/${user.id}?${query.toString()}`);
+                        navigate(`/app/settings/user/${user.id}?${query.toString()}`);
                       }
                     }}
                     multiple
@@ -138,7 +138,7 @@ const PreferencesPage = () => {
                         setAttributes({ ...attributes, selectedMapOverlay: e.target.value });
                       } else if (clicked.id !== 'custom') {
                         const query = new URLSearchParams({ attribute: clicked.attribute });
-                        navigate(`/settings/user/${user.id}?${query.toString()}`);
+                        navigate(`/app/settings/user/${user.id}?${query.toString()}`);
                       }
                     }}
                   >

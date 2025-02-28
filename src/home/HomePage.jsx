@@ -4,6 +4,8 @@ import '../resources/main.css'
 import TopBar from './TopBar';
 import Hero from './Hero';
 import Order from './Order';
+import Features from './Features';
+import MobileApp from './MobileApp';
 
 export default function HomePage(props) {
   return (
@@ -14,8 +16,9 @@ export default function HomePage(props) {
       <div className='w-full bg-base-300 flex items-center justify-center'>
         <img src="/img/Devices.svg" className=" max-w-6xl" />
       </div>
-      
+      <Features />
       <Order />
+      <MobileApp />
       <Footer />
     </main>
   );

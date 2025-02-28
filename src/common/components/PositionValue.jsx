@@ -112,11 +112,11 @@ const PositionValue = ({ position, property, attribute }) => {
         <>
           {formatValue(value)}
           &nbsp;&nbsp;
-          {!deviceReadonly && <Link component={RouterLink} underline="none" to={`/settings/accumulators/${position.deviceId}`}>&#9881;</Link>}
+          {!deviceReadonly && <Link component={RouterLink} underline="none" to={`/app/settings/accumulators/${position.deviceId}`}>&#9881;</Link>}
         </>
       );
     case 'network':
-      return <Link component={RouterLink} underline="none" to={`/network/${position.id}`}>{t('sharedInfoTitle')}</Link>;
+      return <Link component={RouterLink} underline="none" to={`/app/network/${position.id}`}>{t('sharedInfoTitle')}</Link>;
     case 'geofenceIds':
       return <GeofencesValue geofenceIds={value} />;
     case 'driverUniqueId':

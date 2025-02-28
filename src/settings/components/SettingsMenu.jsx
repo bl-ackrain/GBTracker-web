@@ -151,7 +151,7 @@ const SettingsMenu = () => {
               title={t('settingsUsers')}
               link="/app/settings/users"
               icon={<PeopleIcon />}
-              selected={location.pathname.startsWith('/app/settings/user') && location.pathname !== `/settings/user/${userId}`}
+              selected={location.pathname.startsWith('/app/settings/user') && location.pathname !== `/app/settings/user/${userId}`}
             />
           </List>
         </>

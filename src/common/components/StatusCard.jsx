@@ -18,6 +18,9 @@ import {
   TableFooter,
   Link,
   Tooltip,
+  TableHead,
+  Box,
+  Tab,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import CloseIcon from '@mui/icons-material/Close';
@@ -26,6 +29,7 @@ import PublishIcon from '@mui/icons-material/Publish';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PendingIcon from '@mui/icons-material/Pending';
+import RouteIcon from '@mui/icons-material/Route';
 
 import { useTranslation } from './LocalizationProvider';
 import RemoveDialog from './RemoveDialog';
@@ -35,11 +39,13 @@ import usePositionAttributes from '../attributes/usePositionAttributes';
 import { devicesActions } from '../../store';
 import { useCatch, useCatchCallback } from '../../reactHelper';
 import { useAttributePreference } from '../util/preferences';
+import { TabContext, TabList, TabPanel } from '@mui/lab';
 
 const useStyles = makeStyles((theme) => ({
   card: {
     pointerEvents: 'auto',
     width: theme.dimensions.popupMaxWidth,
+    padding: '0px',
   },
   media: {
     height: theme.dimensions.popupImageHeight,
@@ -58,10 +64,10 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1, 1, 0, 2),
   },
   content: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-    maxHeight: theme.dimensions.cardContentMaxHeight,
-    overflow: 'auto',
+    padding: '0px',
+    height: theme.dimensions.cardContentMaxHeight,
+
+    overflow: 'hidden',
   },
   icon: {
     width: '25px',
@@ -171,11 +177,55 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
       if (!permissionResponse.ok) {
         throw Error(await permissionResponse.text());
       }
-      navigate(`/settings/geofence/${item.id}`);
+      navigate(`/app/settings/geofence/${item.id}`);
     } else {
       throw Error(await response.text());
     }
   }, [navigate, position]);
+
+  const AttributesTable =() =>{
+    return(
+      <Table size="small" classes={{ root: classes.table }}>
+      <TableHead>
+        <TableRow>
+          <TableCell>Attribute</TableCell>
+          <TableCell>Value</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {positionItems.split(',').filter((key) => position.hasOwnProperty(key) || position.attributes.hasOwnProperty(key)).map((key) => (
+          <StatusRow
+            key={key}
+            name={positionAttributes[key]?.name || key}
+            content={(
+              <PositionValue
+                position={position}
+                property={position.hasOwnProperty(key) ? key : null}
+                attribute={position.hasOwnProperty(key) ? null : key}
+              />
+            )}
+          />
+        ))}
+
+      </TableBody>
+      <TableFooter>
+        <TableRow>
+          <TableCell colSpan={2} className={classes.cell}>
+            <Typography variant="body2">
+              <Link component={RouterLink} to={`/app/position/${position.id}`}>{t('sharedShowDetails')}</Link>
+            </Typography>
+          </TableCell>
+        </TableRow>
+      </TableFooter>
+      </Table>
+    )
+  }
+
+  const [tabValue, setTabValue] = React.useState('2');
+
+  const handleChange = (event, newValue) => {
+    setTabValue(newValue);
+  };
 
   return (
     <>
@@ -200,7 +250,7 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
                 </CardMedia>
               ) : (
                 <div className={classes.header}>
-                  <Typography variant="body2" color="textSecondary">
+                  <Typography variant="body1" color="textSecondary">
                     {device.name}
                   </Typography>
                   <IconButton
@@ -214,33 +264,17 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
               )}
               {position && (
                 <CardContent className={classes.content}>
-                  <Table size="small" classes={{ root: classes.table }}>
-                    <TableBody>
-                      {positionItems.split(',').filter((key) => position.hasOwnProperty(key) || position.attributes.hasOwnProperty(key)).map((key) => (
-                        <StatusRow
-                          key={key}
-                          name={positionAttributes[key]?.name || key}
-                          content={(
-                            <PositionValue
-                              position={position}
-                              property={position.hasOwnProperty(key) ? key : null}
-                              attribute={position.hasOwnProperty(key) ? null : key}
-                            />
-                          )}
-                        />
-                      ))}
+                  <TabContext value={tabValue}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                      <TabList onChange={handleChange} aria-label="lab API tabs example">
+                        <Tab label="Attributes" value="1" />
+                        <Tab label="Status" value="2" />
+                      </TabList>
+                    </Box>
+                    <TabPanel sx={{overflow: 'auto', height: '90%', padding: '5px'}} value="1"><AttributesTable / ></TabPanel>
+                    <TabPanel sx={{overflow: 'auto', height: '90%', padding: '5px'}} value="2">details here</TabPanel>
 
-                    </TableBody>
-                    <TableFooter>
-                      <TableRow>
-                        <TableCell colSpan={2} className={classes.cell}>
-                          <Typography variant="body2">
-                            <Link component={RouterLink} to={`/position/${position.id}`}>{t('sharedShowDetails')}</Link>
-                          </Typography>
-                        </TableCell>
-                      </TableRow>
-                    </TableFooter>
-                  </Table>
+                  </TabContext>
                 </CardContent>
               )}
               <CardActions classes={{ root: classes.actions }} disableSpacing>
@@ -258,12 +292,12 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
                     onClick={() => navigate('/app/replay')}
                     disabled={disableActions || !position}
                   >
-                    <ReplayIcon />
+                    <RouteIcon />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title={t('commandTitle')}>
                   <IconButton
-                    onClick={() => navigate(`/settings/device/${deviceId}/command`)}
+                    onClick={() => navigate(`/app/settings/device/${deviceId}/command`)}
                     disabled={disableActions}
                   >
                     <PublishIcon />
@@ -271,21 +305,13 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
                 </Tooltip>
                 <Tooltip title={t('sharedEdit')}>
                   <IconButton
-                    onClick={() => navigate(`/settings/device/${deviceId}`)}
+                    onClick={() => navigate(`/app/settings/device/${deviceId}`)}
                     disabled={disableActions || deviceReadonly}
                   >
                     <EditIcon />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title={t('sharedRemove')}>
-                  <IconButton
-                    color="error"
-                    onClick={() => setRemoving(true)}
-                    disabled={disableActions || deviceReadonly}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </Tooltip>
+                
               </CardActions>
             </Card>
           </Draggable>
@@ -299,7 +325,7 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
           <MenuItem component="a" target="_blank" href={`https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${position.latitude}%2C${position.longitude}&heading=${position.course}`}>{t('linkStreetView')}</MenuItem>
           {navigationAppTitle && <MenuItem component="a" target="_blank" href={navigationAppLink.replace('{latitude}', position.latitude).replace('{longitude}', position.longitude)}>{navigationAppTitle}</MenuItem>}
           {!shareDisabled && !user.temporary && (
-            <MenuItem onClick={() => navigate(`/settings/device/${deviceId}/share`)}><Typography color="secondary">{t('deviceShare')}</Typography></MenuItem>
+            <MenuItem onClick={() => navigate(`/app/settings/device/${deviceId}/share`)}><Typography color="secondary">{t('deviceShare')}</Typography></MenuItem>
           )}
         </Menu>
       )}

@@ -95,7 +95,7 @@ const Navigation = () => {
       navigate('/app');
     } else if (query.get('eventId')) {
       const eventId = parseInt(query.get('eventId'), 10);
-      navigate(`/event/${eventId}`);
+      navigate(`/app/event/${eventId}`);
     } else if (query.get('openid')) {
       if (query.get('openid') === 'success') {
         generateLoginToken();

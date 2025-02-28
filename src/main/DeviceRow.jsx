@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import makeStyles from '@mui/styles/makeStyles';
 import {
   IconButton, Tooltip, Avatar, ListItemAvatar, ListItemText, ListItemButton,
+  Divider,
+  Typography,
+  Stack,
+  Chip,
 } from '@mui/material';
 import BatteryFullIcon from '@mui/icons-material/BatteryFull';
 import BatteryChargingFullIcon from '@mui/icons-material/BatteryChargingFull';
@@ -22,13 +26,44 @@ import { mapIconKey, mapIcons } from '../map/core/preloadImages';
 import { useAdministrator } from '../common/util/permissions';
 import EngineIcon from '../resources/images/data/engine.svg?react';
 import { useAttributePreference } from '../common/util/preferences';
+import { styled } from '@mui/material/styles';
+import Badge from '@mui/material/Badge';
+import Box from '@mui/material/Box';
+import SpeedIcon from '@mui/icons-material/Speed';
 
 dayjs.extend(relativeTime);
 
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    '&::after': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      borderRadius: '50%',
+      animation: 'ripple 1.2s infinite ease-in-out',
+      border: '1px solid currentColor',
+      content: '""',
+    },
+  },
+  '@keyframes ripple': {
+    '0%': {
+      transform: 'scale(.8)',
+      opacity: 1,
+    },
+    '100%': {
+      transform: 'scale(2.4)',
+      opacity: 0,
+    },
+  },
+}));
+
 const useStyles = makeStyles((theme) => ({
   icon: {
-    width: '25px',
-    height: '25px',
+    width: '30px',
+    height: '30px',
     filter: 'brightness(0) invert(1)',
   },
   batteryText: {
@@ -58,44 +93,91 @@ const DeviceRow = ({ data, index, style }) => {
   const admin = useAdministrator();
 
   const item = data[index];
+  //console.log('Device [',index, ']:', item)
   const position = useSelector((state) => state.session.positions[item.id]);
-
+  //console.log('Device [',index, ']:', position)
   const devicePrimary = useAttributePreference('devicePrimary', 'name');
   const deviceSecondary = useAttributePreference('deviceSecondary', '');
 
   const secondaryText = () => {
     let status;
     if (item.status === 'online' || !item.lastUpdate) {
-      status = formatStatus(item.status, t);
+      status = position?.address
     } else {
       status = dayjs(item.lastUpdate).fromNow();
     }
     return (
       <>
+      <Typography
+        component="span"
+        variant="primary"
+        sx={{ color: 'text.primary', display: 'inline' }}
+      >
         {deviceSecondary && item[deviceSecondary] && `${item[deviceSecondary]} • `}
-        <span className={classes[getStatusColor(item.status)]}>{status}</span>
+      </Typography>
+      <Typography
+        component="span"
+        variant="primary"
+        sx={{ display: 'inline'}}
+        noWrap={true}
+      >
+        {status}
+      </Typography>
+      
       </>
     );
   };
 
   return (
     <div style={style}>
+
       <ListItemButton
+        divider
         key={item.id}
         onClick={() => dispatch(devicesActions.selectId(item.id))}
         disabled={!admin && item.disabled}
+        sx={{
+          height: '100px',
+          width: '100%',
+          overflow: 'hidden',
+          padding: '0px 5px',
+        }}
       >
-        <ListItemAvatar>
-          <Avatar>
+        <ListItemAvatar >
+          <StyledBadge
+          overlap="circular"
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          variant="dot"
+          color={item.status==='online'?'success':'error'}
+        >
+          <Avatar variant="rounded">
             <img className={classes.icon} src={mapIcons[mapIconKey(item.category)]} alt="" />
           </Avatar>
+          </StyledBadge>
         </ListItemAvatar>
-        <ListItemText
-          primary={item[devicePrimary]}
-          primaryTypographyProps={{ noWrap: true }}
-          secondary={secondaryText()}
-          secondaryTypographyProps={{ noWrap: true }}
-        />
+        <Box sx={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexDirection: 'column',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          padding: '5px 0px'
+        }}>
+        
+          <Stack direction="column">
+            <div style={{fontWeight: '600', fontSize:'1.1rem'}}>{item[devicePrimary]}</div>
+            <div style={{fontWeight: '400', fontSize:'0.9rem'}}>{secondaryText()}</div>
+          </Stack>
+
+
+          <Stack direction="row" spacing={1}>
+            {position?.attributes?.hasOwnProperty('batteryLevel') && <Chip icon={<BatteryChargingFullIcon/>} color="success" label={position?.attributes.batteryLevel+'%'} size="small" variant="outlined" />}
+            {position?.hasOwnProperty('speed') && position.speed > 0 &&<Chip icon={<SpeedIcon/>} color="info" label={Math.floor(position?.speed)+' Km/h'} size="small" variant="outlined" />}
+          </Stack>
+        </Box>
+        
         {position && (
           <>
             {position.attributes.hasOwnProperty('alarm') && (
@@ -116,25 +198,7 @@ const DeviceRow = ({ data, index, style }) => {
                 </IconButton>
               </Tooltip>
             )}
-            {position.attributes.hasOwnProperty('batteryLevel') && (
-              <Tooltip title={`${t('positionBatteryLevel')}: ${formatPercentage(position.attributes.batteryLevel)}`}>
-                <IconButton size="small">
-                  {(position.attributes.batteryLevel > 70 && (
-                    position.attributes.charge
-                      ? (<BatteryChargingFullIcon fontSize="small" className={classes.success} />)
-                      : (<BatteryFullIcon fontSize="small" className={classes.success} />)
-                  )) || (position.attributes.batteryLevel > 30 && (
-                    position.attributes.charge
-                      ? (<BatteryCharging60Icon fontSize="small" className={classes.warning} />)
-                      : (<Battery60Icon fontSize="small" className={classes.warning} />)
-                  )) || (
-                    position.attributes.charge
-                      ? (<BatteryCharging20Icon fontSize="small" className={classes.error} />)
-                      : (<Battery20Icon fontSize="small" className={classes.error} />)
-                  )}
-                </IconButton>
-              </Tooltip>
-            )}
+
           </>
         )}
       </ListItemButton>

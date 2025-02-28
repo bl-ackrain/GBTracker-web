@@ -50,7 +50,7 @@ const UsersPage = () => {
     key: 'connections',
     title: t('sharedConnections'),
     icon: <LinkIcon fontSize="small" />,
-    handler: (userId) => navigate(`/settings/user/${userId}/connections`),
+    handler: (userId) => navigate(`/app/settings/user/${userId}/connections`),
   };
 
   useEffectAsync(async () => {
