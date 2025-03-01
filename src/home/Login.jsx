@@ -49,7 +49,7 @@ export default function Login(props) {
   return (
     <main className='size-full'>
       <div className="hero bg-base-200 min-h-screen">
-        <div className="hero-content mx-auto max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-4xl flex flex-col">
+        <div className="hero-content mx-auto max-w-md sm:max-w-lg md:max-w-3xl lg:max-w-4xl flex flex-col">
         <a className='link' href='/'><img src="/logo.svg" className="max-w-80 w-full" /></a>
 
         <div className='grid grid-cols-1 md:grid-cols-9 gap-6 lg:gap-7'>
@@ -68,7 +68,7 @@ export default function Login(props) {
             </div>: ''}
               
 
-            <fieldset className="fieldset w-full">
+            <form className="fieldset w-full">
                 <legend className="fieldset-legend">Email:</legend>
                 <label className="input validator w-full" >
                 <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></g></svg>
@@ -118,7 +118,7 @@ export default function Login(props) {
             <div className="font-bold">Se Connecter</div>
           </div>
         </button>
-            </fieldset>
+            </form>
 
               <div className="divider">Télécharez l'application</div>
               <div className='items-center flex flex-col gap-2'>
@@ -138,11 +138,30 @@ export default function Login(props) {
               </div>
             </div>
           </div>
-          <div className="col-span-1 md:col-span-4">
-                <div className="p-6 h-full bg-base-100 rounded-md border-1 border-base-300 shadow-md">
-                  <p className="md:py-6">
-                      Notre équipe est joignable par e-mail et par téléphone (7j/7j H24) et nous définissons avec vous les fonctionnalités nécessaires pour améliorer votre gestion au quotidien.
-                  </p> 
+          <div className="col-span-1 md:col-span-4 min-h-96">
+                <div className=" bg-[url(/img/customer-service.jpg)] bg-cover bg-center p-6 h-full rounded-md border-1 border-base-300 shadow-md">
+                  <div className="p-2 rounded-md bg-base-100/50 backdrop-blur-xl">
+                  <h1 className='font-bold text-center'>Besoin d’Aide ?</h1>
+                  <p className='my-3 text-[13px]'>
+                  Contactez-nous pour en savoir plus,
+                  notre équipe est joignable par e-mail et par téléphone (7j/7j H24) et nous définissons avec vous les fonctionnalités nécessaires pour améliorer votre gestion au quotidien.
+
+                  </p>
+                  <div className='flex flex-col justify-center items-center'>
+                  <button className='btn btn-wide btn-ghost'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                  </svg>
+                  support@gbtracker.com
+                  </button>
+                  <button className='btn btn-wide btn-ghost'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                  </svg>
+
+                  05 58 55 65 96
+                  </button>
+                  </div>
+                  
+                  </div>
                 </div>
           </div>
         </div>

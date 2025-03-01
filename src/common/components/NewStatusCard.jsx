@@ -22,6 +22,9 @@ import {
   Box,
   Tab,
   Stack,
+  CardHeader,
+  Avatar,
+  Divider,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import CloseIcon from '@mui/icons-material/Close';
@@ -41,15 +44,16 @@ import { devicesActions } from '../../store';
 import { useCatch, useCatchCallback } from '../../reactHelper';
 import { useAttributePreference } from '../util/preferences';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
+import { mapIconKey, mapIcons } from '../../map/core/preloadImages';
 
 const useStyles = makeStyles((theme) => ({
   card: {
     pointerEvents: 'auto',
-    width: theme.dimensions.popupMaxWidth,
-    padding: '0px',
+    maxWidth: theme.dimensions.popupMaxWidth,
+    minWidth: '250px',
   },
   media: {
-    height: theme.dimensions.popupImageHeight,
+    height: '100px',
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
@@ -62,13 +66,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: theme.spacing(1, 1, 0, 2),
+
   },
   content: {
-    padding: '0px',
-    height: theme.dimensions.cardContentMaxHeight,
+    padding: '0px 5px',
+    maxHeight: theme.dimensions.cardContentMaxHeight,
 
-    overflow: 'hidden',
+    overflowX: 'hidden',
+    overflowY: 'auto',
   },
   icon: {
     width: '25px',
@@ -121,7 +126,7 @@ const StatusRow = ({ name, content }) => {
   );
 };
 
-const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPadding = 0 }) => {
+const NewStatusCard = ({ deviceId, position, onClose, disableActions, desktopPadding = 0 }) => {
   const classes = useStyles({ desktopPadding });
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -226,14 +231,18 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
     //console.log(position)
     //console.log(device)
     return(
-      <Stack
-
-      >
+      <Stack>
         <Box>Modèle: {device.model}</Box>
+        
         <Box>Vitesse: {position.speed} km/h</Box>
         <Box>Véhicule: {position.attributes.motion?'En Mouvement':'Arrêté'}</Box>
         <Box>ignition: {position.attributes.ignition?'on':'off'}</Box>
-        <Box>distance total: {Math.round(position.attributes.totalDistance/1000)} km</Box>
+        <Box sx={{display:'flex', alignItems:'center',justifyContent:'space-evenly', bgcolor:'black', textAlign:'center', color:'#cc2', borderRadius:'8px'}}>
+        
+            <svg width={30} height={30} viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#ffffff" d="M512 896a384 384 0 1 0 0-768 384 384 0 0 0 0 768zm0 64a448 448 0 1 1 0-896 448 448 0 0 1 0 896z"></path><path fill="#ffffff" d="M192 512a320 320 0 1 1 640 0 32 32 0 1 1-64 0 256 256 0 1 0-512 0 32 32 0 0 1-64 0z"></path><path fill="#ffffff" d="M570.432 627.84A96 96 0 1 1 509.568 608l60.992-187.776A32 32 0 1 1 631.424 440l-60.992 187.776zM502.08 734.464a32 32 0 1 0 19.84-60.928 32 32 0 0 0-19.84 60.928z"></path></g></svg>
+            <Typography component={'span'} sx={{fontSize:'1.8rem',letterSpacing:'2px',fontWeight:'400', fontFamily: "'Seven Segment', sans-serif"}}>{Math.round(position.attributes.totalDistance/1000)}</Typography>
+            <Typography component={'span'} sx={{paddingLeft:'8px',fontSize:'1.2rem',fontWeight:'600',}}>Km</Typography>
+        </Box>
         
       </Stack>
     )}
@@ -252,48 +261,44 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
             handle={`.${classes.media}, .${classes.header}`}
           >
             <Card elevation={3} className={classes.card}>
-              {deviceImage ? (
+            {deviceImage && (
                 <CardMedia
+                    component={'img'}
                   className={classes.media}
                   image={`/api/media/${device.uniqueId}/${deviceImage}`}
-                >
-                  <IconButton
-                    size="small"
-                    onClick={onClose}
-                    onTouchStart={onClose}
-                  >
-                    <CloseIcon fontSize="small" className={classes.mediaButton} />
-                  </IconButton>
-                </CardMedia>
-              ) : (
-                <div className={classes.header}>
-                  <Typography variant="body1" color="textSecondary">
-                    {device.name}
-                  </Typography>
-                  <IconButton
-                    size="small"
-                    onClick={onClose}
-                    onTouchStart={onClose}
-                  >
-                    <CloseIcon fontSize="small" />
-                  </IconButton>
-                </div>
+                />
               )}
+                <CardHeader className={classes.header} sx={{ padding: '8px'}}
+                    avatar={
+                    <Avatar sx={{ bgcolor: '#eee' }} variant='rounded'>
+                        <img src={mapIcons[mapIconKey(device.category)]} alt="" />
+                    </Avatar>
+                    }
+                    action={
+                    <IconButton aria-label="close" onClick={onClose} onTouchStart={onClose}>
+                        <CloseIcon fontSize="small" />
+                    </IconButton>
+                    }
+                    title={
+                        <Typography
+                                component="span"
+                                variant="primary"
+                                sx={{ fontWeight: '600'}}
+                              >
+                                {device.name}
+                        </Typography>
+                    }
+                    subheader={device.attributes.VehicleLicensePlate}
+                />
+
+            <Divider />
+              
               {position && (
                 <CardContent className={classes.content}>
-                  <TabContext value={tabValue}>
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                      <TabList onChange={handleChange} aria-label="lab API tabs example">
-                        <Tab label="Details" value="1" />
-                        <Tab label="Status" value="2" />
-                      </TabList>
-                    </Box>
-                    <TabPanel sx={{overflow: 'auto', height: '90%', padding: '5px'}} value="1"><AttributesTable / ></TabPanel>
-                    <TabPanel sx={{overflow: 'auto', padding: '5px'}} value="2"><DeviceStatus /></TabPanel>
-
-                  </TabContext>
+                    <DeviceStatus />
                 </CardContent>
               )}
+              <Divider />
               <CardActions classes={{ root: classes.actions }} disableSpacing>
                 <Tooltip title={t('sharedExtra')}>
                   <IconButton
@@ -356,4 +361,4 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
   );
 };
 
-export default StatusCard;
+export default NewStatusCard;

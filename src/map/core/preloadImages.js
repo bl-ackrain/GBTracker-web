@@ -27,7 +27,7 @@ import tramSvg from '../../resources/images/icon/tram.svg';
 import truckSvg from '../../resources/images/icon/truck.svg';
 import vanSvg from '../../resources/images/icon/van.svg';
 
-export const mapIcons = {
+export const oldmapIcons = {
   animal: animalSvg,
   bicycle: bicycleSvg,
   boat: boatSvg,
@@ -50,6 +50,31 @@ export const mapIcons = {
   tram: tramSvg,
   truck: truckSvg,
   van: vanSvg,
+};
+
+export const mapIcons = {
+  animal: animalSvg,
+  bicycle: bicycleSvg,
+  boat: boatSvg,
+  bus: busSvg,
+  car: '/type/3d/car.png',
+  camper: camperSvg,
+  crane: craneSvg,
+  default: defaultSvg,
+  finish: finishSvg,
+  helicopter: helicopterSvg,
+  motorcycle: motorcycleSvg,
+  person: personSvg,
+  plane: planeSvg,
+  scooter: scooterSvg,
+  ship: shipSvg,
+  start: startSvg,
+  tractor: tractorSvg,
+  trailer: trailerSvg,
+  train: trainSvg,
+  tram: tramSvg,
+  truck: '/type/3d/truck.png',
+  van: '/type/3d/van.png',
 };
 
 export const mapIconKey = (category) => {

@@ -62,9 +62,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const useStyles = makeStyles((theme) => ({
   icon: {
-    width: '30px',
-    height: '30px',
-    filter: 'brightness(0) invert(1)',
+    width: '32px',
+    height: '32px',
   },
   batteryText: {
     fontSize: '0.75rem',
@@ -150,7 +149,7 @@ const DeviceRow = ({ data, index, style }) => {
           variant="dot"
           color={item.status==='online'?'success':'error'}
         >
-          <Avatar variant="rounded">
+          <Avatar sx={{bgcolor:'#eee'}} variant="rounded">
             <img className={classes.icon} src={mapIcons[mapIconKey(item.category)]} alt="" />
           </Avatar>
           </StyledBadge>

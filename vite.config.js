@@ -9,8 +9,8 @@ export default defineConfig(() => ({
   server: {
     port: 3000,
     proxy: {
-      '/api/socket': 'ws://demo.traccar.org:8082',
-      '/api': 'http://demo.traccar.org:8082',
+      '/api/socket': 'ws://s1.mastermind-portal.com:8082',
+      '/api': 'http://s1.mastermind-portal.com:8082',
     },
   },
   build: {
